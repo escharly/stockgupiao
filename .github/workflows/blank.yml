@@ -1,0 +1,19 @@
+if abs(rate) > 0.02:
+    content = "股票报警：当前股票「{0}」, 涨幅「{1:.2f}%」, 请注意！".format(name, rate)
+    print(content)
+
+    json_data = {
+        "msgtype": "text",
+        "text": {
+            "content": content,  # 发送内容
+        },
+        "at": {
+            "atMobiles": [
+            ],
+            "isAtAll": False  # 是否要@某位用户
+        }
+    }
+
+    ding_url = 'https://oapi.dingtalk.com/robot/send?access_token=22f7920d109dd2ea3e6d405d0b72500a25c50db5f983f0308363efc77f1bc2cb'
+    requests.post(url=ding_url, json=json_data)
+    print('报警信息发送成功。')
